@@ -11,7 +11,6 @@ class AutoencoderKL(nn.Module):
         self,
         ddconfig=None,
         lossconfig=None,
-        image_key="fbank",
         embed_dim=None,
         time_shuffle=1,
         subband=1,
@@ -44,7 +43,6 @@ class AutoencoderKL(nn.Module):
         self.time_shuffle = time_shuffle
         self.reload_from_ckpt = reload_from_ckpt
         self.reloaded = False
-        self.mean, self.std = None, None
 
     def encode(self, x):
         # x = self.time_shuffle_operation(x)
@@ -74,7 +72,6 @@ class AutoencoderKL(nn.Module):
 
         if self.flag_first_run:
             print("Latent size: ", z.size())
-            self.flag_first_run = False
 
         dec = self.decode(z)
 
